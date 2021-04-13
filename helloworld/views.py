@@ -20,12 +20,12 @@ class Api(generics.RetrieveUpdateAPIView):
 
 
 class Id(generics.ListAPIView, mixins.RetrieveModelMixin, mixins.ListModelMixin):
-    # input_data = get_object_or_404(Input, id = 1)
-    # # print(input_data.input)
-    # output = ml(input_data.input)
-    # print(output)
-    # input_data.output = output
-    # input_data.save()
+    input_data = get_object_or_404(Input, id = 1)
+    # print(input_data.input)
+    output = ml(input_data.input)
+    print(output)
+    input_data.output = output
+    input_data.save()
     
     serializer_class = InputSerializer
     queryset = Input.objects.all()
