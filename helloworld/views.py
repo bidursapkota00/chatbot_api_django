@@ -1,38 +1,38 @@
-from django.http import HttpResponse
 from rest_framework import generics
 from .models import Input
 from .serializers import InputSerializer
-from .serializers import IdSerializer
 from django.views.generic import TemplateView
-
-from django.shortcuts import get_object_or_404
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
 from .ai import *
-
-from rest_framework import viewsets
 from rest_framework import mixins
 
 
-class Api(generics.RetrieveUpdateAPIView):
-    queryset = Input.objects.all()
-    serializer_class = InputSerializer
+# class Api(mixins.CreateModelMixin, generics.GenericAPIView):
+#     queryset = Input.objects.all()
+#     serializer_class = InputSerializer
 
+#     def post(self, request, *args, **kwargs):
+#         return self.create(request, *args, **kwargs)
+@api_view(['POST'])
+def api(request):
+    serializer = InputSerializer(data = request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response({"success":"true"})
 
+    return Response({"success":"false"})      
 
-
-class Id(generics.ListAPIView, mixins.RetrieveModelMixin, mixins.ListModelMixin):
-    input_data = get_object_or_404(Input, id = 1)
-    # print(input_data.input)
-    output = ml(input_data.input)
-    print(output)
-    input_data.output = output
-    input_data.save()
+class Id(APIView):
+    def get(self,request,format=json):
+        ip = [ip.input for ip in Input.objects.all()]
+        op = ml(ip[-1])
+        i = [ip for ip in Input.objects.all()]
+        i[-1].output = op
+        i[-1].save()
+        return Response(op)
     
-    serializer_class = InputSerializer
-    queryset = Input.objects.all()
-    
-
-# def home_page(request):
-#     return HttpResponse(<a href="{% url 'readwrite' %}">'<h1>Hello, World</h1>'</a>)
 
 class HomePageView(TemplateView):
     template_name = 'base.html'
