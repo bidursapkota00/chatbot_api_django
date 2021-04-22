@@ -48,6 +48,10 @@ REST_FRAMEWORK = {
     ]
 }
 
+MIDDLEWARE_CLASSES = (
+    'app.CorsMiddleware',
+)
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
