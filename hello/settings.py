@@ -49,7 +49,7 @@ REST_FRAMEWORK = {
 }
 
 MIDDLEWARE_CLASSES = (
-    'app.CorsMiddleware',
+    'helloworld.CorsMiddleware',
 )
 
 MIDDLEWARE = [
