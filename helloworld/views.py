@@ -31,7 +31,7 @@ class Id(APIView):
         i = [ip for ip in Input.objects.all()]
         i[-1].output = op
         i[-1].save()
-        return Response(op)
+        return Response({"output": op})
     
 
 class HomePageView(TemplateView):
