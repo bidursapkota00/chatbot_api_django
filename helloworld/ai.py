@@ -19,7 +19,7 @@ def ml(sentence):
             words, labels, training, output = pickle.load(f)
     except:
         words = []
-        labels = ["greeting", "goodbye", "age", "name", "shop", "hours"]
+        labels = ["greeting", "goodbye", "age", "name", "service", "location"]
         docs_x = []
         docs_y = []
 
@@ -90,7 +90,7 @@ def ml(sentence):
     if os.path.isfile('ai_model.tflearn.index'):
         model.load('ai_model.tflearn')
     else:
-        model.fit(training, output, n_epoch=1000, batch_size=8, show_metric=True)
+        model.fit(training, output, n_epoch=10000, batch_size=8, show_metric=True)
         model.save('ai_model.tflearn')
 
     def bag_of_words(s, words):

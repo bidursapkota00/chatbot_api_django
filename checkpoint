@@ -1,2 +1,2 @@
-model_checkpoint_path: "/home/b2r/django/ai_model.tflearn"
-all_model_checkpoint_paths: "/home/b2r/django/ai_model.tflearn"
+model_checkpoint_path: "C:\\Users\\b2r\\chat_api\\chatbot-api-00\\ai_model.tflearn"
+all_model_checkpoint_paths: "C:\\Users\\b2r\\chat_api\\chatbot-api-00\\ai_model.tflearn"
