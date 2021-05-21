@@ -20,7 +20,12 @@ def api(request):
     serializer = InputSerializer(data = request.data)
     if serializer.is_valid():
         serializer.save()
-        return Response({"success":"true"})
+        ip = [ip.input for ip in Input.objects.all()]
+        op = ml(ip[-1])
+        i = [ip for ip in Input.objects.all()]
+        i[-1].output = op
+        i[-1].save()
+        return Response({"output": op})
 
     return Response({"success":"false"})      
 
